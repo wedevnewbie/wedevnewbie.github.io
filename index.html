@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amaka Iloegbunam — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100vh; overflow-x: hidden; }
+
+    body { background: #f5f0e8; font-family: 'DM Sans', sans-serif; }
+
+    .bg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .bg-lines {
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(106,126,76,0.08) 60px);
+    }
+    .bg-word {
+      position: absolute; font-family: 'Playfair Display', serif;
+      font-weight: 700; color: rgba(106,126,76,0.06); line-height: 1;
+      user-select: none; white-space: nowrap;
+    }
+    .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.25; }
+    .corner-tl { position: absolute; top: 20px; left: 20px; width: 80px; height: 80px; border-top: 3px solid rgba(106,126,76,0.3); border-left: 3px solid rgba(106,126,76,0.3); }
+    .corner-tr { position: absolute; top: 20px; right: 20px; width: 80px; height: 80px; border-top: 3px solid rgba(196,130,154,0.35); border-right: 3px solid rgba(196,130,154,0.35); }
+    .corner-bl { position: absolute; bottom: 50px; left: 20px; width: 80px; height: 80px; border-bottom: 3px solid rgba(196,130,154,0.3); border-left: 3px solid rgba(196,130,154,0.3); }
+    .corner-br { position: absolute; bottom: 50px; right: 20px; width: 80px; height: 80px; border-bottom: 3px solid rgba(106,126,76,0.3); border-right: 3px solid rgba(106,126,76,0.3); }
+    .dot-grid {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(106,126,76,0.12) 1.5px, transparent 1.5px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse at 10% 50%, black 0%, transparent 40%), radial-gradient(ellipse at 90% 50%, black 0%, transparent 40%);
+    }
+
+    .desktop { position: relative; z-index: 1; width: 100%; min-height: 100vh; padding: 28px 20px 56px 20px; }
+
+    .ed-header {
+      max-width: 860px; margin: 0 auto 24px auto;
+      border-top: 3px solid #6a7e4c; border-bottom: 1px solid #6a7e4c;
+      padding: 6px 0; display: flex; justify-content: space-between; align-items: center;
+    }
+    .ed-header-left { font-family: 'DM Sans', sans-serif; font-size: 11px; color: #6a7e4c; letter-spacing: 0.12em; text-transform: uppercase; }
+    .ed-header-title { font-family: 'Playfair Display', serif; font-size: 13px; color: #3a2a1a; letter-spacing: 0.05em; }
+    .ed-header-right { font-family: 'DM Sans', sans-serif; font-size: 11px; color: #c4829a; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .win {
+      background: #faf8f3; border: 2px solid; border-color: #fff #9aaa7a #9aaa7a #fff;
+      box-shadow: 3px 3px 0 rgba(106,126,76,0.35); width: 100%; max-width: 860px; margin: 0 auto 20px auto;
+    }
+    .win-title {
+      background: linear-gradient(to right, #4a5e2c, #7a9a4a); color: #f5f0e8;
+      font-family: 'VT323', monospace; font-size: 15px; padding: 4px 8px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .win-title > span { display: flex; align-items: center; gap: 6px; }
+    .win-btns { display: flex; gap: 2px; }
+    .win-btn {
+      width: 16px; height: 14px; background: #c0c0c0;
+      border: 1px solid; border-color: white #808080 #808080 white;
+      font-size: 9px; display: flex; align-items: center; justify-content: center;
+      font-family: monospace; font-weight: bold; color: #000;
+    }
+    .win-menubar {
+      background: #eeeae0; border-bottom: 1px solid #c8c0a8;
+      padding: 2px 8px; font-family: 'VT323', monospace; font-size: 14px;
+      display: flex; gap: 12px; color: #3a2a1a;
+    }
+    .win-menubar span { cursor: pointer; padding: 0 2px; }
+    .win-menubar span:hover { background: #4a5e2c; color: #f5f0e8; }
+    .win-body { padding: 14px; font-size: 13px; color: #2a2018; line-height: 1.6; }
+    .inset {
+      background: #fffdf8; border: 1px solid; border-color: #c8c0a8 #f0ece0 #f0ece0 #c8c0a8;
+      padding: 12px; margin: 6px 0;
+    }
+    .statusbar {
+      background: #eeeae0; border-top: 1px solid #c8c0a8;
+      padding: 2px 8px; font-family: 'VT323', monospace; font-size: 12px;
+      color: #6a7e4c; display: flex; justify-content: space-between;
+    }
+    .separator { border: none; border-top: 1px solid #d8d0b8; border-bottom: 1px solid #fff; margin: 10px 0; }
+
+    .tag { display: inline-block; background: #6a7e4c; color: #f5f0e8; font-family: 'VT323', monospace; font-size: 13px; padding: 2px 10px; margin: 2px; }
+    .tag.pink { background: #c4829a; }
+    .cert-pill {
+      display: inline-block; background: #eeeae0;
+      border: 1px solid; border-color: #fff #c8c0a8 #c8c0a8 #fff;
+      font-family: 'VT323', monospace; font-size: 13px; padding: 3px 12px; margin: 3px 3px; color: #4a5e2c;
+    }
+    .link-btn {
+      display: inline-block; background: #eeeae0;
+      border: 2px solid; border-color: #fff #c8c0a8 #c8c0a8 #fff;
+      font-family: 'VT323', monospace; font-size: 14px;
+      padding: 4px 16px; cursor: pointer; color: #2a2018; text-decoration: none; margin: 4px 4px 0 0;
+    }
+    .link-btn:hover { background: #6a7e4c; color: #f5f0e8; border-color: #fff #4a5e2c #4a5e2c #fff; }
+
+    .blink { animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .terminal { background: #1c1a10; color: #c8d8a8; font-family: 'Share Tech Mono', monospace; font-size: 13px; padding: 14px; flex: 1; min-width: 200px; }
+
+    .proj-block { border-bottom: 1px solid #ddd8c8; padding: 12px 0; }
+    .proj-block:last-child { border-bottom: none; }
+    .proj-title { font-family: 'VT323', monospace; font-size: 16px; color: #4a5e2c; margin-bottom: 2px; }
+    .proj-meta { font-size: 11px; color: #9a8a6a; margin-bottom: 5px; letter-spacing: 0.05em; }
+    .proj-desc { font-size: 12px; line-height: 1.6; color: #3a3020; }
+    .proj-link { display: inline-block; font-family: 'VT323', monospace; font-size: 13px; color: #c4829a; text-decoration: none; margin-top: 5px; }
+    .proj-link:hover { color: #6a7e4c; }
+
+    .two-col { display: grid; grid-template-columns: 1fr
