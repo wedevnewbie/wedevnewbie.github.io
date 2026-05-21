@@ -1,6 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amaka Iloegbunam — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100vh; overflow-x: hidden; }
+    body { background: #f5f0e8; font-family: 'DM Sans', sans-serif; }
+    .page { width: 100%; min-height: 100vh; padding: 28px 20px 20px 20px; background: #f5f0e8; }
+    .ed-header { max-width: 860px; margin: 0 auto 24px auto; border-top: 3px solid #6a7e4c; border-bottom: 1px solid #6a7e4c; padding: 6px 0; display: flex; justify-content: space-between; align-items: center; }
+    .ed-header-title { font-family: 'Playfair Display', serif; font-size: 14px; color: #3a2a1a; }
+    .ed-header-right { font-family: 'DM Sans', sans-serif; font-size: 11px; color: #c4829a; letter-spacing: 0.1em; text-transform: uppercase; }
+    .win { background: #faf8f3; border: 2px solid; border-color: #fff #9aaa7a #9aaa7a #fff; box-shadow: 3px 3px 0 rgba(106,126,76,0.35); width: 100%; max-width: 860px; margin: 0 auto 20px auto; }
+    .win-title { background: #4a5e2c; color: #f5f0e8; font-family: 'VT323', monospace; font-size: 15px; padding: 4px 8px; display: flex; align-items: center; justify-content: space-between; }
+    .win-title > span { display: flex; align-items: center; gap: 6px; }
+    .win-btns { display: flex; gap: 2px; }
+    .win-btn { width: 16px; height: 14px; background: #c0c0c0; border: 1px solid; border-color: white #808080 #808080 white; font-size: 9px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-weight: bold; color: #000; }
+    .win-menubar { background: #eeeae0; border-bottom: 1px solid #c8c0a8; padding: 2px 8px; font-family: 'VT323', monospace; font-size: 14px; display: flex; gap: 12px; color: #3a2a1a; }
+    .win-menubar span { cursor: pointer; padding: 0 2px; }
+    .win-menubar span:hover { background: #4a5e2c; color: #f5f0e8; }
+    .win-body { padding: 14px; font-size: 13px; color: #2a2018; line-height: 1.6; }
+    .inset { background: #fffdf8; border: 1px solid; border-color: #c8c0a8 #f0ece0 #f0ece0 #c8c0a8; padding: 12px; margin: 6px 0; }
+    .statusbar { background: #eeeae0; border-top: 1px solid #c8c0a8; padding: 2px 8px; font-family: 'VT323', monospace; font-size: 12px; color: #6a7e4c; display: flex; justify-content: space-between; }
+    .separator { border: none; border-top: 1px solid #d8d0b8; border-bottom: 1px solid #fff; margin: 10px 0; }
+    .tag { display: inline-block; background: #6a7e4c; color: #f5f0e8; font-family: 'VT323', monospace; font-size: 13px; padding: 2px 10px; margin: 2px; }
+    .tag.pink { background: #c4829a; }
+    .cert-pill { display: inline-block; background: #eeeae0; border: 1px solid; border-color: #fff #c8c0a8 #c8c0a8 #fff; font-family: 'VT323', monospace; font-size: 13px; padding: 3px 12px; margin: 3px 3px; color: #4a5e2c; }
+    .link-btn { display: inline-block; background: #eeeae0; border: 2px solid; border-color: #fff #c8c0a8 #c8c0a8 #fff; font-family: 'VT323', monospace; font-size: 14px; padding: 4px 16px; cursor: pointer; color: #2a2018; text-decoration: none; margin: 4px 4px 0 0; }
+    .link-btn:hover { background: #6a7e4c; color: #f5f0e8; }
+    .blink { animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .terminal { background: #1c1a10; color: #c8d8a8; font-family: 'Share Tech Mono', monospace; font-size: 13px; padding: 14px; flex: 1; min-width: 200px; }
+    .proj-block { border-bottom: 1px solid #ddd8c8; padding: 12px 0; }
+    .proj-block:last-child { border-bottom: none; }
+    .proj-title { font-family: 'VT323', monospace; font-size: 16px; color: #4a5e2c; margin-bottom: 2px; }
+    .proj-meta { font-size: 11px; color: #9a8a6a; margin-bottom: 5px; }
+    .proj-desc { font-size: 12px; line-height: 1.6; color: #3a3020; }
+    .proj-link { display: inline-block; font-family: 'VT323', monospace; font-size: 13px; color: #c4829a; text-decoration: none; margin-top: 5px; }
+    .proj-link:hover { color: #6a7e4c; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 860px; margin: 0 auto 20px auto; }
+    .two-col .win { max-width: 100%; margin: 0; }
+    .pull-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: #6a7e4c; border-left: 3px solid #c4829a; padding-left: 10px; margin: 10px 0; line-height: 1.5; }
+    .section-label { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #c4829a; margin-bottom: 4px; }
+    .taskbar { max-width: 860px; margin: 20px auto 0 auto; background: #eeeae0; border: 2px solid; border-color: #fff #c8c0a8 #c8c0a8 #fff; display: flex; align-items: center; padding: 0 8px; gap: 4px; height: 38px; }
+    .start-btn { background: #eeeae0; border: 2px solid; border-color: #fff #c8c0a8 #c8c0a8 #fff; font-family: 'VT323', monospace; font-size: 15px; padding: 2px 12px; font-weight: bold; cursor: pointer; color: #2a2018; }
+    .start-btn:hover { background: #6a7e4c; color: #f5f0e8; }
+    .taskbar-sep { width: 2px; height: 28px; border-left: 1px solid #c8c0a8; border-right: 1px solid #fff; margin: 0 2px; }
+    .taskbar-win { background: #eeeae0; border: 2px solid; border-color: #c8c0a8 #fff #fff #c8c0a8; font-family: 'VT323', monospace; font-size: 12px; padding: 2px 8px; cursor: pointer; white-space: nowrap; color: #2a2018; }
+    .clock { margin-left: auto; background: #eeeae0; border: 1px solid; border-color: #c8c0a8 #fff #fff #c8c0a8; font-family: 'VT323', monospace; font-size: 14px; padding: 2px 10px; color: #6a7e4c; }
+    .footer { max-width: 860px; margin: 16px auto 0 auto; border-top: 1px solid #6a7e4c; padding: 6px 0; display: flex; justify-content: space-between; }
+    .footer span { font-family: 'DM Sans', sans-serif; font-size: 10px; color: #9a8a6a; letter-spacing: 0.1em; text-transform: uppercase; }
+    .footer span.pink { color: #c4829a; }
+    @media (max-width: 620px) { .two-col { grid-template-columns: 1fr; } .taskbar-win { display: none; } }
+  </style>
+</head>
 <body>
-<h1>Hello Amaka</h1>
+<div class="page">
+  <div class="ed-header">
+    <div></div>
+    <div class="ed-header-title">Amaka Iloegbunam — Portfolio</div>
+    <div class="ed-header-right">vol. 1 · 2026</div>
+  </div>
+  <div class="win">
+    <div class="win-title">
+      <span>🖥️ amaka_iloegbunam.exe</span>
+      <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div></div>
+    </div>
+    <div class="win-body" style="display:flex; gap:16px; align-items:stretch; flex-wrap:wrap;">
+      <div class="terminal">
+        <div>C:\&gt; run portfolio.bat<span class="blink"> ▋</span></div>
+        <div style="margin-top:12px; color:#f5f0e8; font-size:24px; font-family:'VT323',monospace;">Amaka Iloegbunam</div>
+        <div style="color:#c8d8a8; font-size:14px; font-family:'VT323',monospace; margin-top:4px;">Project Manager · Program Manager · Social Strategist</div>
+        <div style="color:#8a9a6a; font-size:12px; margin-top:8px; line-height:1.6;">Turning ideas into action through<br>strategic planning &amp; digital enablement</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px; justify-content:center; min-width:140px; padding:4px 0;">
+        <div class="pull-quote">"Helping teams move faster, work smarter, and deliver outcomes that actually matter."</div>
+        <a class="link-btn" href="mailto:contactamakailo@gmail.com">✉️ Email Me</a>
+        <a class="link-btn" href="https://www.linkedin.com/in/amaka-i-7702b8170/" target="_blank">💼 LinkedIn</a>
+        <a class="link-btn" href="https://amakailo.myportfolio.com" target="_blank">🌐 Full Portfolio</a>
+      </div>
+    </div>
+    <div class="statusbar"><span>Ready</span><span>contactamakailo@gmail.com</span></div>
+  </div>
+  <div class="two-col">
+    <div class="win">
+      <div class="win-title">
+        <span>👤 about.txt — Notepad</span>
+        <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div></div>
+      </div>
+      <div class="win-menubar"><span>File</span><span>Edit</span></div>
+      <div class="win-body">
+        <div class="inset" style="font-size:12px;">
+          <div class="section-label">Professional Summary</div>
+          <p style="margin-bottom:8px;">Experienced program and project management professional with 10+ years across tech, fashion, and beauty industries. I've spent three years in project management and two in program management, with a focus on <strong style="color:#4a5e2c;">digital enablement</strong> — helping teams move faster, work smarter, and deliver outcomes that actually matter.</p>
+          <hr class="separator">
+          <p style="font-size:11px; color:#5a4a30;">I bring a mix of strategic thinking and hands-on execution — whether that's leading cross-functional initiatives, integrating digital tools, or translating complex ideas into clear, actionable plans.</p>
+        </div>
+      </div>
+      <div class="statusbar"><span>Read-only</span><span>UTF-8</span></div>
+    </div>
+    <div class="win">
+      <div class="win-title">
+        <span>⚙️ skills.dat</span>
+        <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div></div>
+      </div>
+      <div class="win-menubar"><span>File</span><span>View</span></div>
+      <div class="win-body">
+        <div class="inset">
+          <div class="section-label">Core Competencies</div>
+          <div style="margin-bottom:8px;">
+            <span class="tag">Project Management</span>
+            <span class="tag">Program Management</span>
+            <span class="tag pink">Digital Marketing</span>
+            <span class="tag pink">Social Strategy</span>
+            <span class="tag">QA &amp; Testing</span>
+            <span class="tag">Data Analysis</span>
+            <span class="tag pink">App Integrations</span>
+            <span class="tag">Strategic Planning</span>
+          </div>
+          <hr class="separator">
+          <div class="section-label">Certifications</div>
+          <div>
+            <span class="cert-pill">☁️ Salesforce Administrator</span>
+            <span class="cert-pill">🔄 Scrum Master</span>
+          </div>
+        </div>
+      </div>
+      <div class="statusbar"><span>Verified ✓</span><span>2 credentials</span></div>
+    </div>
+  </div>
+  <div class="win" id="sec-projects">
+    <div class="win-title">
+      <span>📁 projects — File Explorer</span>
+      <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div></div>
+    </div>
+    <div class="win-menubar"><span>File</span><span>Edit</span><span>View</span></div>
+    <div class="win-body">
+      <div class="inset">
+        <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#9a8a6a; margin-bottom:10px;">C:\AMAKA\WORK\PROJECTS\</div>
+        <div class="proj-block">
+          <div class="proj-title">📂 SyncUp — Custom Salesforce Application</div>
+          <div class="proj-meta">2022 · Salesforce Development · Custom Application</div>
+          <div class="proj-desc">Built a custom Salesforce application to streamline team coordination and task management. Leveraged Salesforce platform tools to design, develop, and deploy a tailored solution improving workflow efficiency.</div>
+          <a class="proj-link" href="https://amakailo.myportfolio.com/custom-salesforce-application" target="_blank">▶ View Project →</a>
+        </div>
+        <div class="proj-block">
+          <div class="proj-title">📂 Salesforce Files Connect — Google Integration</div>
+          <div class="proj-meta">2022 · Salesforce · System Integration</div>
+          <div class="proj-desc">Configured Salesforce Files Connect to integrate with Google Drive, enabling seamless file access and collaboration directly within Salesforce. Improved cross-platform productivity and reduced friction for end users.</div>
+          <a class="proj-link" href="https://amakailo.myportfolio.com/copy-of-custom-salesforce-application" target="_blank">▶ View Project →</a>
+        </div>
+        <div class="proj-block">
+          <div class="proj-title">📂 Creative Project &amp; Social Media Management</div>
+          <div class="proj-meta">2022 · Digital Marketing · Content Strategy</div>
+          <div class="proj-desc">Led end-to-end creative direction and social media strategy — from content planning and design to publishing and performance analysis. Drove brand consistency and audience engagement across platforms.</div>
+          <a class="proj-link" href="https://amakailo.myportfolio.com/graphics-for-social" target="_blank">▶ View Project →</a>
+        </div>
+      </div>
+    </div>
+    <div class="statusbar"><span>3 projects</span><span><a href="https://amakailo.myportfolio.com/work" target="_blank" style="color:#c4829a; text-decoration:none;">▶ Click to view full case studies</a></span></div>
+  </div>
+  <div class="taskbar">
+    <div class="start-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">🪟 Start</div>
+    <div class="taskbar-sep"></div>
+    <div class="taskbar-win" onclick="window.scrollTo({top:0,behavior:'smooth'})">🖥️ amaka.exe</div>
+    <div class="taskbar-win" onclick="document.getElementById('sec-projects').scrollIntoView({behavior:'smooth'})">📁 projects</div>
+    <div class="clock" id="clock">12:00 PM</div>
+  </div>
+  <div class="footer">
+    <span>© 2026 Amaka Iloegbunam</span>
+    <span class="pink">All Rights Reserved</span>
+  </div>
+</div>
+<script>
+  function updateClock() {
+    const now = new Date();
+    let h = now.getHours(), m = now.getMinutes();
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    document.getElementById('clock').textContent = h + ':' + String(m).padStart(2,'0') + ' ' + ampm;
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+</script>
 </body>
 </html>
